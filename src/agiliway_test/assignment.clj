@@ -3,7 +3,7 @@
 ;; evaluate function
 ;; please note that mixed expressions is NOT covered yet. Example of such function call: {:x 3 :y 6} (* 2 (+ x y)) => 18
 ;; probably could be rewritten in this way:
-;; (eval (read-string (apply str (map #(clojure.string/replace % (re-pattern "\\w") "10") "(+ x x)"))))
+;; (eval (read-string (apply str (map #(clojure.string/replace % (re-pattern "\\w") "10") "(+ x x)")))) => 20
 (defmulti  evaluate (fn [opts _] (empty? opts)))
 (defmethod evaluate true [_ expr] (eval expr))
 (defmethod evaluate false [opts expr] (eval (map #(if (number? %) % (symbol %))
