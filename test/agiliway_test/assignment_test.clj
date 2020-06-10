@@ -10,9 +10,11 @@
 
 (deftest ->javascript-test
   (testing "->javascript function. Arguments list expected."
-    (is (= (->javascript "example" '(+ 1 (* x x))) "function example(x) { return (1 + (x * x)); }")))
+    (is (= (->javascript "example" '(+ 1 (* x x)))
+           "function example(x) { return (1 + (x * x)); }")))
   (testing "->javascript function. Different name and no args expected."
-    (is (= (->javascript "example-2" '(* 5 (- 10 5))) "function example-2() { return (5 * (10 - 5)); }"))))
+    (is (= (->javascript "example-2" '(* 5 (- 10 5)))
+           "function example-2() { return (5 * (10 - 5)); }"))))
 
 (deftest optimize-test
   (testing "Multiply by zero. Variant #1.")
