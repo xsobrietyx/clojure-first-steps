@@ -14,13 +14,13 @@
 ;; optimize function
 (defmulti  optimize (fn [[_ _ & c]] identity c))
 (defmethod optimize '((* x 0)) [[a b _]] (eval (list a b 0)))
-(defmethod optimize '((* x 1)) [[a b [_ d _]]] (eval (str "'" (list a b d))))
+(defmethod optimize '((* x 1)) [[a b [_ d _]]] (str "'" (list a b d)))
 (defmethod optimize '((* 0 x)) [[a b _]] (eval (list a b 0)))
-(defmethod optimize '((* 1 x)) [[a b [_ _ e]]] (eval (str "'" (list a b e))))
-(defmethod optimize '((+ 0 x)) [[a b [_ _ e]]] (eval (str "'" (list a b e))))
-(defmethod optimize '((+ x 0)) [[a b [_ d _]]] (eval (str "'" (list a b d))))
-(defmethod optimize '((- x 0)) [[a b [_ c _]]] (eval (str "'" (list a b c))))
-(defmethod optimize '((/ y 1)) [[a b [_ d _]]] (eval (str "'" (list a b d))))
+(defmethod optimize '((* 1 x)) [[a b [_ _ e]]] (str "'" (list a b e)))
+(defmethod optimize '((+ 0 x)) [[a b [_ _ e]]] (str "'" (list a b e)))
+(defmethod optimize '((+ x 0)) [[a b [_ d _]]] (str "'" (list a b d)))
+(defmethod optimize '((- x 0)) [[a b [_ c _]]] (str "'" (list a b c)))
+(defmethod optimize '((/ y 1)) [[a b [_ d _]]] (str "'" (list a b d)))
 
 ;; ->javascript function
 (defn ->javascript [name [a b [c d e]]] (let [args (set [b d e])] (str "function " name "("
