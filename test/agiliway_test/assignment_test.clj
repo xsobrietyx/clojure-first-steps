@@ -16,9 +16,9 @@
 
 (deftest optimize-test
   (testing "Multiply by zero. Variant #1.")
-  (is (= (optimize '(+ 5 (* x 0))) 5))
+  (is (= (optimize '(+ 5 (* x 0))) "'(+ 5 0)"))
   (testing "Multiply by zero. Variant #2.")
-  (is (= (optimize '(* 5 (* 0 x))) 0))
+  (is (= (optimize '(* 5 (* 0 x))) "'(* 5 0)"))
   (testing "Multiply by one. Variant #1.")
   (is (= (optimize '(* 42 (* 1 x))) "'(* 42 x)"))
   (testing "Multiply by one. Variant #2.")

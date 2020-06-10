@@ -13,9 +13,9 @@
 
 ;; optimize function
 (defmulti  optimize (fn [[_ _ & c]] identity c))
-(defmethod optimize '((* x 0)) [[a b _]] (eval (list a b 0)))
+(defmethod optimize '((* x 0)) [[a b _]] (str "'" (list a b 0)))
 (defmethod optimize '((* x 1)) [[a b [_ d _]]] (str "'" (list a b d)))
-(defmethod optimize '((* 0 x)) [[a b _]] (eval (list a b 0)))
+(defmethod optimize '((* 0 x)) [[a b _]] (str "'" (list a b 0)))
 (defmethod optimize '((* 1 x)) [[a b [_ _ e]]] (str "'" (list a b e)))
 (defmethod optimize '((+ 0 x)) [[a b [_ _ e]]] (str "'" (list a b e)))
 (defmethod optimize '((+ x 0)) [[a b [_ d _]]] (str "'" (list a b d)))
